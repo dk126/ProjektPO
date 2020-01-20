@@ -18,18 +18,35 @@ namespace Projekt___garderoba
             Garderoba1.Powiadom();
             Garderoba1.Wejdz(Marek);//Marek chce wejść do garderony nr 1 , ale ona jest zajęta , więc musi poczekać
             Console.WriteLine("Stanisław ubiera: ");
-            Ubranie buty1 = new Buty(); // tworzenie butów 
+            Ubranie bluza1 = new Bluza();
+            bluza1 = new RozpinanaBluza(bluza1);
+            bluza1 = new UkolorSzary(bluza1);
+            Console.WriteLine(bluza1.Opis() + bluza1.Rozmiar());
+            Ubranie spodnie1 = new Spodnie();
+            spodnie1 = new Dresy(spodnie1);
+            spodnie1 = new UkolorCzarny(spodnie1);
+            Console.WriteLine(spodnie1.Opis() + spodnie1.Rozmiar());
+            Buty buty1 = new Sportowe(); // tworzenie butów 
             buty1 = new Nike(buty1); // dodanie , że sa one Nike
-            buty1 = new CzarneButy(buty1); // dodanie , że są czarne
-            Console.WriteLine(buty1.Opis()+ " o rozmiarze " + buty1.Rozmiar()); // wypisanie , że Stanisał zakłada te buty
+            buty1 = new BkolorBialy(buty1); // dodanie , że są czarne
+            Console.WriteLine(buty1.Rodzaj() + buty1.RozmiarB()); // wypisanie , że Stanisał zakłada te buty
             Garderoba1.Wyjdz(Stanislaw);
+            Garderoba1.Powiadom();
             Garderoba1.Wejdz(Marek);//Po opuszczeniu garderoby przez Stanisława, Marek może wejśc do garderoby nr 1 
             Garderoba1.Powiadom();
-            Console.WriteLine("Marek ubiera ");
-            Ubranie buty2 = new Buty();
-            buty2 = new Adidas(buty2);
-            buty2 = new BialeButy(buty2);
-            Console.WriteLine(buty2.Opis() + " o rozmiarze " + buty2.Rozmiar());
+            Console.WriteLine("\r\nMarek ubiera: ");
+            Ubranie koszula1 = new Koszula();
+            koszula1 = new UkolorBialy(koszula1);
+            koszula1 = new ZeStojka(koszula1);
+            Console.WriteLine(koszula1.Opis() + koszula1.Rozmiar());
+            Ubranie spodnie2 = new Spodnie();
+            spodnie2 = new Garniturowe(spodnie2);
+            spodnie2 = new UkolorSzary(spodnie2);
+            Console.WriteLine(spodnie2.Opis() + spodnie2.Rozmiar());
+            Buty buty2 = new Eleganckie();
+            buty2 = new Lasocki(buty2);
+            buty2 = new BkolorCzarny(buty2);
+            Console.WriteLine(buty2.Rodzaj() + buty2.RozmiarB());
 
 
 
@@ -63,14 +80,14 @@ namespace Projekt___garderoba
             }
             else
             {
-                Console.WriteLine("Ktoś korzysta już z garderoby numer" +this.numer +  ", prosze poczekać ");
+                Console.WriteLine("Jeśli chcesz skorzystać z garderoby numer " +this.numer +  ", proszę chwilę poczekać... \r\n");
                 
             }
         }
         public void Wyjdz(IObserwator obserwator)
-        {
+        {            
             Korzystający.Remove(obserwator);// Osoba opuszcza garderobę 
-            Console.WriteLine("Garderoba numer " + this.numer + " jest wolna");
+            Console.WriteLine("\r\nGarderoba numer " + this.numer + " jest wolna");
         }
         public void Powiadom() //Mówi innym oczekującym , że ta garderoba jest przez kogoś zajęta 
         {
@@ -91,7 +108,7 @@ namespace Projekt___garderoba
 
         public void Update()
         {
-            Console.WriteLine("Osoba o imieniu " + this.name + " wchodzi do garderoby u numerze " + this.numer); //osoba dostaje wiadomosc , że ktoś już jest w tej garderobie
+            Console.WriteLine("\r\nOsoba o imieniu " + this.name + " wchodzi do garderoby o numerze " + this.numer); //osoba dostaje wiadomosc , że ktoś już jest w tej garderobie
         }
     }
     abstract public class Ubranie
@@ -100,6 +117,7 @@ namespace Projekt___garderoba
         public abstract string Rozmiar();
 
     }
+
     public abstract class UbranieDekorator : Ubranie
     {
         protected Ubranie clothes;
@@ -116,17 +134,28 @@ namespace Projekt___garderoba
             return clothes.Rozmiar();
         }
     }
-    public class Buty : Ubranie
+    abstract public class Buty
     {
-        public override string Opis()
+        public abstract string Rodzaj();
+        public abstract string RozmiarB();
+    }
+    public abstract class ButyDekorator : Buty
+    {
+        protected Buty shoes;
+        protected ButyDekorator(Buty _shoes)
         {
-            return "Buty";
+            this.shoes = _shoes;
         }
-        public override string Rozmiar()
+        public override string Rodzaj()
         {
-            return "";
+            return shoes.Rodzaj();
+        }
+        public override string RozmiarB()
+        {
+            return shoes.RozmiarB();
         }
     }
+
     public class Spodnie : Ubranie
     {
         public override string Opis()
@@ -135,78 +164,233 @@ namespace Projekt___garderoba
         }
         public override string Rozmiar()
         {
-            return "";
+            return " w rozmiarze";
+        }
+    }
+    public class Dresy : UbranieDekorator
+    {
+        public Dresy(Ubranie _clothes) : base(_clothes)
+        {
+        }
+
+        public override string Opis()
+        {
+            return clothes.Opis() + " dresowe";
+        }
+        public override string Rozmiar()
+        {
+            return clothes.Rozmiar() + " L";
+        }
+    }
+    public class Garniturowe : UbranieDekorator
+    {
+        public Garniturowe(Ubranie _clothes) : base(_clothes)
+        {
+        }
+
+        public override string Opis()
+        {
+            return clothes.Opis() + " garniturowe";
+        }
+        public override string Rozmiar()
+        {
+            return clothes.Rozmiar() + " L";
+        }
+    }
+    public class Koszula : Ubranie
+    {
+        public override string Opis()
+        {
+            return "Koszulę";
+        }
+        public override string Rozmiar()
+        {
+            return " w rozmiarze";
+        }
+    }
+    public class ZeStojka : UbranieDekorator
+    {
+        public ZeStojka(Ubranie _clothes) : base(_clothes)
+        {
+        }
+        public override string Opis()
+        {
+            return clothes.Opis() + " ze stójką";
+        }
+        public override string Rozmiar()
+        {
+            return clothes.Rozmiar() + " M";
         }
     }
     public class Koszulka : Ubranie
     {
         public override string Opis()
         {
-            return "Koszulka";
+            return "Koszulkę";
         }
         public override string Rozmiar()
         {
-            return "";
+            return " w rozmiarze";
+        }
+    }
+    public class Polo : UbranieDekorator
+    {
+        public Polo(Polo _clothes) : base(_clothes)
+        {
+        }
+        public override string Opis()
+        {
+            return clothes.Opis() + " polo";
+        }
+        public override string Rozmiar()
+        {
+            return clothes.Rozmiar() + " L";
         }
     }
     public class Bluza : Ubranie
     {
         public override string Opis()
         {
-            return "Bluza";
+            return "Bluzę";
         }
         public override string Rozmiar()
         {
-            return "";
+            return " w rozmiarze";
         }
     }
-    public class CzarneButy : UbranieDekorator
+    public class RozpinanaBluza : UbranieDekorator
     {
-        public CzarneButy(Ubranie _clothes) : base(_clothes)
+        public RozpinanaBluza(Ubranie _clothes) : base(_clothes)
         {
         }
+
         public override string Opis()
         {
-            return clothes.Opis() + ", kolor czarny";
+            return clothes.Opis() + " rozpinaną";
         }
         public override string Rozmiar()
         {
-            return clothes.Rozmiar() + "42";
+            return clothes.Rozmiar() + " L";
         }
     }
-    public class Nike : UbranieDekorator
+    public class UkolorBialy : UbranieDekorator
     {
-        public Nike(Ubranie _clothes) : base(_clothes)
+        public UkolorBialy(Ubranie _clothes) : base(_clothes)
         {
         }
+
         public override string Opis()
         {
-            return clothes.Opis() + " marki Nike";
+            return clothes.Opis() + " w kolorze białym";
         }
     }
-    public class Adidas : UbranieDekorator
+    public class UkolorCzarny : UbranieDekorator
     {
-        public Adidas(Ubranie _clothes): base(_clothes)
+        public UkolorCzarny(Ubranie _clothes) : base(_clothes)
         {
         }
+
         public override string Opis()
         {
-            return clothes.Opis() + " marki Adidas";
+            return clothes.Opis() + " w kolorze czarnym";
         }
     }
-    public class BialeButy : UbranieDekorator
+    public class UkolorSzary : UbranieDekorator
     {
-        public BialeButy(Ubranie _clothes) : base(_clothes)
+        public UkolorSzary(Ubranie _clothes) : base(_clothes)
         {
         }
+
         public override string Opis()
         {
-            return clothes.Opis() + ", kolor biały";
+            return clothes.Opis() + " w kolorze szarym";
         }
-        public override string Rozmiar()
+    }
+    public class Sportowe : Buty
+    {
+        public override string Rodzaj()
         {
-            return clothes.Rozmiar() + "45";
+            return "Sportowe buty";
         }
+        public override string RozmiarB()
+        {
+            return " w rozmiarze";
+        }
+    }
+    public class Eleganckie : Buty
+    {
+        public override string Rodzaj()
+        {
+            return "Eleganckie buty";
+        }
+        public override string RozmiarB()
+        {
+            return " w rozmiarze";
+        }
+    }
+    public class Nike : ButyDekorator
+    {
+        public Nike(Buty _shoes) : base(_shoes)
+        {
+        }
+        public override string Rodzaj()
+        {
+            return shoes.Rodzaj() + " marki Nike";
+        }
+        public override string RozmiarB()
+        {
+            return shoes.RozmiarB() + " 42,5";
+        }
+    }
+    public class Adidas : ButyDekorator
+    {
+        public Adidas(Buty _shoes) : base(_shoes)
+        {
+        }
+        public override string Rodzaj()
+        {
+            return shoes.Rodzaj() + " marki Adidas";
+        }
+        public override string RozmiarB()
+        {
+            return shoes.RozmiarB() + " 42";
+        }
+    }
+    public class Lasocki : ButyDekorator
+    {
+        public Lasocki(Buty _shoes) : base(_shoes)
+        {
+        }
+        public override string Rodzaj()
+        {
+            return shoes.Rodzaj() + " marki Lasocki";
+        }
+        public override string RozmiarB()
+        {
+            return shoes.RozmiarB() + " 42";
+        }
+    }
+    public class BkolorBialy : ButyDekorator
+    {
+        public BkolorBialy(Buty _shoes) : base(_shoes)
+        {
+        }
+        public override string Rodzaj()
+        {
+            return shoes.Rodzaj() + " w kolorze białym";
+        }
+
+    }
+    public class BkolorCzarny : ButyDekorator
+    {
+        public BkolorCzarny(Buty _shoes) : base(_shoes)
+        {
+        }
+        public override string Rodzaj()
+        {
+            return shoes.Rodzaj() + " w kolorze czarnym";
+        }
+
     }
 
 } 
