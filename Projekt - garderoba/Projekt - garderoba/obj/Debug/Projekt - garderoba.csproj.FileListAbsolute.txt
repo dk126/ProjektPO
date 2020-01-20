@@ -1,0 +1,12 @@
+C:\Users\sebak\Desktop\Projekt V2\Projekt - garderoba\Projekt - garderoba\bin\Debug\Projekt - garderoba.exe.config
+C:\Users\sebak\Desktop\Projekt V2\Projekt - garderoba\Projekt - garderoba\bin\Debug\Projekt - garderoba.exe
+C:\Users\sebak\Desktop\Projekt V2\Projekt - garderoba\Projekt - garderoba\bin\Debug\Projekt - garderoba.pdb
+C:\Users\sebak\Desktop\Projekt V2\Projekt - garderoba\Projekt - garderoba\obj\Debug\Projekt - garderoba.csprojAssemblyReference.cache
+C:\Users\sebak\Desktop\Projekt V2\Projekt - garderoba\Projekt - garderoba\obj\Debug\Projekt - garderoba.exe
+C:\Users\sebak\Desktop\Projekt V2\Projekt - garderoba\Projekt - garderoba\obj\Debug\Projekt - garderoba.pdb
+C:\Users\dkule\Dropbox\Projekt V2\Projekt - garderoba\Projekt - garderoba\bin\Debug\Projekt - garderoba.exe.config
+C:\Users\dkule\Dropbox\Projekt V2\Projekt - garderoba\Projekt - garderoba\bin\Debug\Projekt - garderoba.exe
+C:\Users\dkule\Dropbox\Projekt V2\Projekt - garderoba\Projekt - garderoba\bin\Debug\Projekt - garderoba.pdb
+C:\Users\dkule\Dropbox\Projekt V2\Projekt - garderoba\Projekt - garderoba\obj\Debug\Projekt - garderoba.csprojAssemblyReference.cache
+C:\Users\dkule\Dropbox\Projekt V2\Projekt - garderoba\Projekt - garderoba\obj\Debug\Projekt - garderoba.exe
+C:\Users\dkule\Dropbox\Projekt V2\Projekt - garderoba\Projekt - garderoba\obj\Debug\Projekt - garderoba.pdb
